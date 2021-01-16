@@ -3,8 +3,8 @@
   <!-- MENU SIDEBAR-->
   <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
-      <a href="#">
-        <img src="assets/images/logo.png" alt="luv2shop" class="img-responsive">
+      <a routerLink="/products">
+        <img src="assets/images/agribaylogo.png" alt="agribay" class="img-responsive">
       </a>
     </div>
     <app-product-category-menu></app-product-category-menu>
@@ -19,12 +19,9 @@
         <div class="container-fluid">
           <div class="header-wrap">
             <app-product-search></app-product-search>
-            <div class="cart-area d-n">
-              <a href="shopping-detail.html">
-                <div class="total">19.22 <span> 2</span> </div> <i class="fa fa-shopping-cart"
-                  aria-hidden="true"></i>
-              </a>
-            </div>
+
+            <app-cart-status></app-cart-status>
+
           </div>
           <div class="account-wrap"></div>
         </div>
