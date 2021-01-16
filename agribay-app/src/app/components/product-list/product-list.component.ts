@@ -7,22 +7,31 @@ import { ProductService } from 'src/app/services/product.service';
   selector: 'app-product-list',
   templateUrl: './product-list-grid.component.html',
   // templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
+  products: Product[] = [];
+  searchMode: boolean = false;
+  categoryMode: boolean = false;
+  currentItemCategory: string = null;
+  previousItemCategory: string = null;
 
-  products: Product[];
-  searchMode: boolean
-  categoryMode: boolean
-  currentItemCategory: string;
+  // new properties for pagination
+  pageNumber: number = 1;
+  pageSize: number = 2; // change to 10 later
+  totalElements: number = 0;
 
-  constructor(private productService: ProductService,
-              private route: ActivatedRoute) { }
+  previousKeyword: string = null;
+
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
       this.listProducts();
-    })
+    });
   }
 
   listProducts() {
@@ -39,33 +48,65 @@ export class ProductListComponent implements OnInit {
       this.handleListAllProducts();
     }
   }
+  
+  processResult() {
+    return data => {
+      this.products = data.content;
+      this.pageNumber = data.number + 1;
+      this.pageSize = data.size;
+      this.totalElements = data.totalElements;
+    }
+  }
 
   handleSearchProducts() {
     const keyword: string = this.route.snapshot.paramMap.get('keyword');
 
+    // if we have a different keyword than previous
+    // then set pageNumber to 1
+    if (this.previousKeyword !== keyword) {
+      this.pageNumber = 1;
+    }
+
+    this.previousKeyword = keyword;
+
     // now search for the products using keyword
-    this.productService.searchProducts(keyword).subscribe(
-      data => {
-        this.products = data;
-      }
-    );
+    this.productService.searchProductsPaginate(
+      this.pageNumber - 1,
+      this.pageSize,
+      keyword
+    ).subscribe(this.processResult());
   }
 
   handleListProductsByCategory() {
     this.currentItemCategory = this.route.snapshot.paramMap.get('itemCategory');
 
-    this.productService.getProductsByCategory(this.currentItemCategory).subscribe(
-      data => {
-        this.products = data;
-      }
-    );
+    if (this.previousItemCategory !== this.currentItemCategory) {
+      this.pageNumber = 1;
+    }
+
+    this.previousItemCategory = this.currentItemCategory;
+
+    this.productService
+      .getProductsByCategoryPaginate(
+        this.pageNumber - 1,
+        this.pageSize,
+        this.currentItemCategory
+      )
+      .subscribe(this.processResult());
   }
 
+
   handleListAllProducts() {
-    this.productService.getAllProducts().subscribe(
-      data => {
-        this.products = data;
-      }
-    );
+    console.log("callled");
+    this.productService.getAllProductsPaginate(
+      this.pageNumber - 1,
+      this.pageSize,
+    ).subscribe(this.processResult());
+  }
+
+  updatePageSize(pageSize: number) {
+    this.pageSize = pageSize;
+    this.pageNumber = 1;
+    this.listProducts();
   }
 }

@@ -19,27 +19,31 @@ export class ProductService {
     return this.httpClient.get<Product>(productUrl);
   }
 
-  getProductsList(searchUrl: string): Observable<Product[]> {
+  getProductsListPaginate(searchUrl: string): Observable<GetResponseProducts> {
     return this.httpClient
-      .get<GetResponseProducts>(searchUrl)
-      .pipe(map((response) => response.content));
+      .get<GetResponseProducts>(searchUrl);
   }
 
-  getAllProducts(): Observable<Product[]> {
-    const searchUrl = `${this.baseUrl}?page=0&size=2`;
-    return this.getProductsList(searchUrl);
+  getAllProductsPaginate(page: number, pageSize: number): Observable<GetResponseProducts> {
+    const searchUrl = `${this.baseUrl}?page=${page}&size=${pageSize}`;
+    return this.getProductsListPaginate(searchUrl);
   }
 
-  getProductsByCategory(itemCategory: string): Observable<Product[]> {
-    // build URL based on category
-    const searchUrl = `${this.baseUrl}/search/findByCategory?category=${itemCategory}&page=0&size=2`;
-    return this.getProductsList(searchUrl);
+  getProductsByCategoryPaginate(page: number,
+                                pageSize: number,
+                                itemCategory: string): Observable<GetResponseProducts> {
+    // build URL based on category, page and size
+    const searchUrl = `${this.baseUrl}/search/findByCategory?category=${itemCategory}`
+                      + `&page=${page}&size=${pageSize}`;
+    return this.getProductsListPaginate(searchUrl);
   }
 
-  searchProducts(keyword: string): Observable<Product[]> {
+  searchProductsPaginate(page: number,
+                          pageSize: number,
+                          keyword: string): Observable<GetResponseProducts> {
     // build URL based on keyword
-    const searchUrl = `${this.baseUrl}/search/findByItemNameContaining?name=${keyword}&page=0&size=2`;
-    return this.getProductsList(searchUrl);
+    const searchUrl = `${this.baseUrl}/search/findByItemNameContaining?name=${keyword}&page=${page}&size=${pageSize}`;
+    return this.getProductsListPaginate(searchUrl);
   }
 
   getProductCategories(): Observable<ProductCategory> {
@@ -50,4 +54,8 @@ export class ProductService {
 
 interface GetResponseProducts {
   content: Product[];
+  size: number,
+  totalElements: number,
+  totalPages: number,
+  number: number,
 }
