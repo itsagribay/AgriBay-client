@@ -16,23 +16,23 @@
                         </td>
 
                         <td>
-                            <p>{{ tempCartItem.name}}"
+                            <p>{{ tempCartItem.name}}
                             <p>
                             <p>{{ tempCartItem.unitPrice | currency:'INR'}}
                             <p>
                         </td>
                         <td>
                             <div class="item">
-                                <label>Quantity</label>{{tempCartItem.quantity}}
+                                <label>Quantity:</label>
 
-                                <div>
+                               
                                     <div class="row no-gutters">
                                         <div class="col">
                                             <button (click)="incrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-plus"></i>
                                             </button>
                                         </div>
-                                    </div>
+                                   
 
                                     <div class="col ml-4 mr-2">
                                         {{tempCartItem.quantity}}
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
 
-                            <button (click)="remove(tempCartItem)" class="btn btn-primary btn-sm mt-2">Remove</button>
+                            <button (click)="remove(tempCartItem)" class="btn btn-danger btn-sm mt-2">Remove</button>
 
                             <p class="mt-2">Subtotal:{{tempCartItem.quantity*tempCartItem.unitPrice | currency: 'INR'}}
                             </p>
@@ -55,11 +55,12 @@
                     </tr>
 
                     <tr>
-                        <td> colspan="2"</td>
+                        <td colspan="2"></td>
                         <td style="font-weight: bold">
                             <p>Total Quantity:{{totalQuantity}}</p>
                             <p>Shipping:Free</p>
                             <p>Total Price:{{totalPrice}}</p>
+                            <a routerLink="/checkout" class="btn btn-primary">Checkout</a>
                         </td>
                     </tr>
 
