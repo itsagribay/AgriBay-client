@@ -78,7 +78,11 @@ const routes: Routes = [
       useClass: TokenInterceptor,
       multi: true
     }
-  ,ProductService],
+  ,{
+      provide: ProductService,
+      useClass:ProductService,
+      multi:true
+  }],
   bootstrap: [AppComponent]
  // providers: [ProductService],
   
