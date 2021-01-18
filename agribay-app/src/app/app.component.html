@@ -6,8 +6,11 @@
       <a routerLink="/products">
         <img src="assets/images/agribaylogo.png" alt="agribay" class="img-responsive">
       </a>
+      <nav>
+        
+      </nav>
     </div>
-    <app-product-category-menu></app-product-category-menu>
+ <app-product-category-menu></app-product-category-menu> 
   </aside>
   <!-- END MENU SIDEBAR-->
 
@@ -19,7 +22,23 @@
         <div class="container-fluid">
           <div class="header-wrap">
             <app-product-search></app-product-search>
-
+            <!-- <div *ngIf="!isLoggedIn"> -->
+              <div class="flex-grow-1 float-right">
+                <div *ngIf="isLoggedIn" ngbDropdown class="float-right">
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button (click)="goToUserProfile()" ngbDropdownItem>Profile</button>
+                        <button (click)="logout()" ngbDropdownItem>Logout</button>
+                    </div>
+                    <button class="userdetails" id="dropdownBasic1" ngbDropdownToggle>
+                        <img class="account-icon" src="https://www.redditstatic.com/avatars/avatar_default_08_D4E815.png">
+                        {{username}}
+                    </button>
+                </div>            
+                <div *ngIf="!isLoggedIn">
+                    <a routerLink="/signup" class="float-right sign-up mr-2">Sign up</a>
+                    <a routerLink="/login" class="float-right login mr-2">Login</a>
+                </div>
+            </div>
             <app-cart-status></app-cart-status>
 
           </div>
@@ -38,6 +57,8 @@
 <footer>
   <ul>
     <li><a href="#">About Us</a></li>
+    <li><a routerLink="/signup">signup</a></li>
+      <li><a routerLink="/login">Login</a></li>
     <li><a href="#">Contact Us</a></li>
     <li><a href="#">Help</a></li>
   </ul>
