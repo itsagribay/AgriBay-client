@@ -1,0 +1,217 @@
+<div class="main-content page-m">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
+
+                <!-- customer form -->
+                <div formGroupName="customer" class="form-area">
+                    <h3>Customer</h3>
+
+                    <div class="row">
+                        <div class="col-md-2"> <label>First Name</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="firstName" type="text">
+
+                                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+                                    <div *ngIf="firstName.errors.required">
+                                        First Name is required
+                                    </div>
+
+                                    <div *ngIf="firstName.errors.minlength">
+                                        First Name must be at least 2 characters long
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2"> <label>Last Name</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="lastName" type="text">
+
+                                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+                                    <div *ngIf="lastName.errors.required">
+                                        Last Name is required
+                                    </div>
+
+                                    <div *ngIf="lastName.errors.minlength">
+                                        Last Name must be at least 2 characters long
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2"> <label>Email</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="email" type="text">
+
+                                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                                    <div *ngIf="email.errors.required">
+                                        Email is required
+                                    </div>
+
+                                    <div *ngIf="email.errors.pattern">
+                                        Email address is not valid
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- delivery address -->
+                <div formGroupName="deliveryAddress" class="form-area">
+                    <h3>Delivery Address</h3>
+
+                    <div class="row">
+                        <div class="col-md-2"> <label>Name</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="name" type="text">
+
+                                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                                    <div *ngIf="name.errors.required">
+                                        Name is required
+                                    </div>
+
+                                    <div *ngIf="name.errors.minlength">
+                                        Name must be at least 2 characters long
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2"> <label>Address</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="address" type="text">
+
+                                <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
+                                    <div *ngIf="address.errors.required">
+                                        Address is required
+                                    </div>
+
+                                    <div *ngIf="address.errors.minlength">
+                                        Enter a valid address
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2"> <label>City</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="city" type="text">
+
+                                <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+                                    <div *ngIf="city.errors.required">
+                                        City is required
+                                    </div>
+
+                                    <div *ngIf="city.errors.minlength">
+                                        Enter a valid city name
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2"> <label>State</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="state" type="text">
+
+                                <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert alert-danger">
+                                    <div *ngIf="state.errors.required">
+                                        State is required
+                                    </div>
+
+                                    <div *ngIf="state.errors.minlength">
+                                        Enter valid State name
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2"> <label>Pin Code</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="pin" type="text">
+
+                                <div *ngIf="pin.invalid && (pin.dirty || pin.touched)" class="alert alert-danger">
+                                    <div *ngIf="pin.errors.required">
+                                        Pin Code is required
+                                    </div>
+
+                                    <div *ngIf="pin.errors.pattern">
+                                        Enter a valid Pin Code
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2"> <label>Phone</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="phone" type="text">
+
+                                <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger">
+                                    <div *ngIf="phone.errors.required">
+                                        Phone number is required
+                                    </div>
+
+                                    <div *ngIf="phone.errors.pattern">
+                                        Enter valid Phone Number
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Order Details -->
+                <div class="form-area">
+                    <h3>Review Your Order</h3>
+                    <p>Total Quantity: {{ totalQuantity }}</p>
+                    <p>Shipping: FREE</p>
+                    <p>Total Price: Rs.: {{ totalPrice }} </p>
+                </div>
+
+
+                <!-- submit btn -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-info">Place Order</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    
+</div>
+
