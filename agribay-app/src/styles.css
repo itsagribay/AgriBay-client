@@ -7,6 +7,13 @@
 
 
  /* Auth global css*/
+
+
+
+ 
+
+
+
  input.ng-invalid.ng-touched {
     border: 1px solid red;    
   }
@@ -224,7 +231,7 @@ aside.menu-sidebar.d-none.d-lg-block.clr{
  */
 
 .header-desktop{
-    background:#0da8e4;
+    background:#2b3333;
     -webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
     -moz-box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
     box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
@@ -313,9 +320,9 @@ input.au-input.au-input-xl{
 }
 
 .au-input{
-    line-height:43px;
+    /* line-height:43px; */
     border:1px solid #e5e5e5;
-    font-size:14px;
+    /* font-size:14px; */
     color:#666;
     padding:0 17px;
     -webkit-border-radius:3px;
@@ -343,7 +350,7 @@ input.au-input.au-input-xl{
     background:#205b8d;
     line-height:43px;
     color:#fff;
-    border-radius:30px;
+    border-radius:3px;
     border:1px solid #0da8e4;
     float:left;
     margin-top:7px;

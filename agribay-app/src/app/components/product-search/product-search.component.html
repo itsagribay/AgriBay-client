@@ -4,12 +4,17 @@
         #myInput    
         type="text" 
         placeholder="Search for data ..." 
-        class="au-input au-input-xl"
+        class="au-input"
         (keyup.enter)="doSearch(myInput.value)"
     />
     
-    <button (click)="doSearch(myInput.value)" class="au-btn-submit">
+
+    
+
+    <button (click)="doSearch(myInput.value)" class="btn btn-primary ms-2">
     Search
     </button>
+
+    
  
 </div>
