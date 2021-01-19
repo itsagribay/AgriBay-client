@@ -1,0 +1,78 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+      <div class="container-fluid">
+        <h1>Product Create Form</h1>
+        <form [formGroup]="productListingForm" (ngSubmit)="onSubmit()">
+            <label>
+                Item:
+                <select formControlName="itemId">
+                    <option 
+                    *ngFor="let item of items" 
+                    [value]="item.id"
+                    >
+                    {{ item.name }}
+                  </option>
+                </select>
+            </label>
+            <br>
+            <label>
+                Unit Price (in rupees):
+                <input 
+                    type="number" 
+                    formControlName="unitPrice"
+                    min=1
+                />
+            </label>
+            <br>
+            <label>
+                Total Quantity (in {{ unitsForQuantity }}s):
+                <input 
+                    type="number" 
+                    formControlName="totalQuantity"
+                    step="0.25"
+                />
+            </label>
+            <br>
+            <label>
+                Total Price: <input type="number" [value]="totalPrice" disabled>
+            </label>
+            <br>
+            <label>
+                Image 1:
+                <input type="file" formControlName="imageUrl1" />
+              </label>
+              <br>
+              <label>
+                Image 2:
+                <input type="file" formControlName="imageUrl2" />
+              </label>
+              <br>
+
+              <label>
+                Product description:- <br>
+                <textarea formControlName="description" rows="3" cols="45">
+                </textarea>
+              </label>
+              <br>
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary" [disabled]="!productListingForm.valid">Add Product Listing</button>
+              </div>
+          </form>
+          
+          <hr />
+          
+          <p>
+            Form Value: {{ productListingForm.value | json }}
+          </p>
+          
+          <p>
+            Form Status: {{ productListingForm.status }}
+          </p>
+          
+          <!-- <p>
+            <button (click)="updateProfile()">Update Profile</button>
+          </p> -->
+          
+      </div>
+    </div>
+</div>

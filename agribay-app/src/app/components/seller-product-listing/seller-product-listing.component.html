@@ -1,0 +1,70 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+      <div class="container-fluid">
+
+<table class="table table-striped">
+    <thead style="background:#205b8d; color: white;">
+        <tr>
+            <th>Name</th>
+            <th>Unit Price</th>
+            <th>Total Quantity</th>
+            <th>Total Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td>{{ product.item.name }}</td>
+            <td>{{ product.unitPrice }}</td>
+            <td>{{ product.totalQuantity }}</td>
+            <td>{{ product.totalPrice }}</td>
+            <td>
+                <button type="button" class="btn btn-primary">
+                    Edit
+                </button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" (click)="openDeleteDialogModal(content, product)">
+                    Delete
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Product Listing deletion</h4>
+        <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Are you sure you want to delete <span class="text-primary">"{{ productToDelete.item.name }}"</span> product listing?</strong></p>
+        <p>All information associated to this product listing will be permanently deleted.
+        <span class="text-danger">This operation can not be undone.</span>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="d('cancel click')">Cancel</button>
+        <button type="button" ngbAutofocus class="btn btn-danger" (click)="c('Ok click')">Ok</button>
+      </div>
+</ng-template>
+    
+
+    <div class="d-flex justify-content-center">
+        <a routerLink="/product-listing/create">
+            <button type="button" class="btn-lg btn-primary">Create new product listing</button>
+        </a>
+    </div>
+    <br>
+    <div class="d-flex justify-content-center">
+        <a routerLink="#">
+            <button type="button" class="btn-lg btn-success">View order requests</button>
+        </a>
+    </div>
+</div>
+</div>
+</div>

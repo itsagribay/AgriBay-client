@@ -1,13 +1,28 @@
 <div class="page-wrapper">
-
   <!-- MENU SIDEBAR-->
   <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
       <a routerLink="/products">
-        <img src="assets/images/agribaylogo.png" alt="agribay" class="img-responsive">
+        <img
+          src="assets/images/agribaylogo.png"
+          alt="agribay"
+          class="img-responsive"
+        />
       </a>
     </div>
-    <app-product-category-menu></app-product-category-menu>
+    <div class="menu-sidebar-content js-scrollbar1">
+      <nav class="navbar-sidebar">
+        <app-product-category-menu></app-product-category-menu>
+
+        <div class="mt-5 pt-5">
+          <a routerLink="/product-listing">
+            <button type="button" class="btn btn-dark" style="background:#205b8d;">
+              Your product listings
+            </button>
+          </a>
+        </div>
+      </nav>
+    </div>
   </aside>
   <!-- END MENU SIDEBAR-->
 
@@ -19,9 +34,7 @@
         <div class="container-fluid">
           <div class="header-wrap">
             <app-product-search></app-product-search>
-
             <app-cart-status></app-cart-status>
-
           </div>
           <div class="account-wrap"></div>
         </div>
@@ -30,15 +43,13 @@
     <!-- END HEADER DESKTOP-->
     <!-- MAIN CONTENT-->
     <router-outlet></router-outlet>
-
-    </div>
-
+  </div>
 </div>
 
-<footer>
+<!-- <footer>
   <ul>
     <li><a href="#">About Us</a></li>
     <li><a href="#">Contact Us</a></li>
     <li><a href="#">Help</a></li>
   </ul>
-</footer>
+</footer> -->

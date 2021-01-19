@@ -115,4 +115,8 @@ export class ProductListComponent implements OnInit {
      this.cartService.addToCart(theCartItem);
    }
 
+  counter(i: number) {
+    return new Array(i);
+  }
+
 }

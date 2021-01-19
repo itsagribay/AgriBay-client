@@ -6,13 +6,18 @@
           <div class="product-box">
             <a routerLink="/products/{{ product.id }}">
               <img src="{{ product.imageUrl1 }}" class="img-responsive" />
-            </a>
-            
-            <a routerLink="/products/{{ product.id }}">
               <h1>{{ product.item.name }}</h1>
             </a>
-            
-            <div class="price">{{ product.totalPrice | currency: "INR" }}</div>
+            <p>Sold by {{ product.seller.username }}</p>
+
+            <div class="price">{{ product.unitPrice | currency: "INR" }} for 1 {{ product.item.unit }}</div>
+            <div class="mt-2 mb-2">
+              <span class="mr-2">Quantity: </span>
+              <select>
+                <option *ngFor="let in of counter(product.totalQuantity); let i = index">{{ i }}</option>
+              </select>
+              <span> {{ product.item.unit }}s</span>
+            </div>
             <button (click) ="addToCart(product)" class="btn btn-primary btn-sm">Add to cart</button>
           </div>
         </div>
