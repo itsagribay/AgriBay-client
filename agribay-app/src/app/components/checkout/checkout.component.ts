@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Order } from 'src/app/class/order';
+import { OrderItem } from 'src/app/class/order-item';
+import { Purchase } from 'src/app/class/purchase';
 import { CartService } from 'src/app/services/cart.service';
+import { CheckoutService } from 'src/app/services/checkout.service';
 
 @Component({
   selector: 'app-checkout',
@@ -11,11 +16,14 @@ export class CheckoutComponent implements OnInit {
 
   checkoutFormGroup: FormGroup;
 
+  
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
   constructor(private formBuilder: FormBuilder,
-              private cartService: CartService) { }
+              private cartService: CartService,
+              private checkoutService: CheckoutService,
+              private router: Router) { }
 
   ngOnInit(): void {
 
@@ -89,9 +97,50 @@ export class CheckoutComponent implements OnInit {
 
     if (this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched();
+      return;
     }
 
-    console.log(this.checkoutFormGroup.get('deliveryAddress').value);
+
+    let order = new Order();
+    order.totalPrice = this.totalPrice;
+    order.totalQuantity = this.totalQuantity;
+
+    const cartItems = this.cartService.cartItems;
+
+    let orderItems: OrderItem[] = [];
+    for (let i=0; i<cartItems.length; i++) {
+      orderItems[i] = new OrderItem(cartItems[i]);
+    }
+
+    let purchase = new Purchase();
+    purchase.customer = this.checkoutFormGroup.controls['customer'].value;
+    purchase.deliveryAddress = this.checkoutFormGroup.controls['deliveryAddress'].value;
+    purchase.order = order;
+    purchase.orderItem = orderItems;
+
+    // call api
+    this.checkoutService.placeOrder(purchase).subscribe({
+      next: response => {
+        alert(`Your order received.\nOrder number: ${response.orderNumber}`);
+
+        // resetcart
+        this.resetCart();
+      },
+      error: err => { alert(`Error: ${err.message}`);}
+    });
+
+    // console.log(this.checkoutFormGroup.get('deliveryAddress').value);
+  }
+  resetCart() {
+    // reset data
+    this.cartService.cartItems = [];
+    this.cartService.totalPrice.next(0);
+    this.cartService.totalQuantity.next(0);
+
+    // reset form
+    this.checkoutService.reset();
+    // redirect to products page
+    // to do
   }
 
 }
