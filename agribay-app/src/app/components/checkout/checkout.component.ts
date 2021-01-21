@@ -116,7 +116,7 @@ export class CheckoutComponent implements OnInit {
     purchase.customer = this.checkoutFormGroup.controls['customer'].value;
     purchase.deliveryAddress = this.checkoutFormGroup.controls['deliveryAddress'].value;
     purchase.order = order;
-    purchase.orderItem = orderItems;
+    purchase.orderItems = orderItems;
 
     // call api
     this.checkoutService.placeOrder(purchase).subscribe({
@@ -126,7 +126,7 @@ export class CheckoutComponent implements OnInit {
         // resetcart
         this.resetCart();
       },
-      error: err => { alert(`Error: ${err.message}`);}
+      error: err => { alert(`-- Error: ${err.message}`);}
     });
 
     // console.log(this.checkoutFormGroup.get('deliveryAddress').value);
@@ -138,9 +138,10 @@ export class CheckoutComponent implements OnInit {
     this.cartService.totalQuantity.next(0);
 
     // reset form
-    this.checkoutService.reset();
+    this.checkoutFormGroup.reset();
     // redirect to products page
-    // to do
+    this.router.navigateByUrl('/products');
+    
   }
 
 }

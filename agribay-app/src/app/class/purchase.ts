@@ -7,5 +7,5 @@ export class Purchase {
     customer: Customer;
     deliveryAddress: Address;
     order: Order;
-    orderItem: OrderItem[];
+    orderItems: OrderItem[];
 }
