@@ -11,6 +11,49 @@
   <hr />
   <div>
     Your Cart:
+    <div class="container-fluid">
+
+      <div *ngIf="cartItems.length>0">
+          <table class="table table-bordered">
+              <tr>
+                  <th width="20">Items</th>
+                  <th width="50">Description</th>
+                  <th width="30">Price</th>
+              </tr>
+
+              <tr *ngFor="let tempCartItem of cartItems">
+                  <td>
+                      <img src="{{ tempCartItem.imageUrl}}" class="img-responsive" width="150px" />
+                  </td>
+
+                  <td>
+                      <p>{{ tempCartItem.name}}
+                      <p>
+                      <p>{{ tempCartItem.unitPrice | currency:'INR'}}
+                      <p>
+                  </td>
+                  <td>
+                     
+
+              <tr>
+                  <td colspan="2"></td>
+                  <td style="font-weight: bold">
+                      <p>Total Quantity:{{totalQuantity}}</p>
+                      <p>Shipping:Free</p>
+                      <p>Total Price:{{totalPrice}}</p>
+                      
+                  </td>
+              </tr>
+
+          </table>
+      </div>
+
+      <!--if cart is empty then display cart empty message-->
+      <div *ngIf="cartItems.length === 0" class="alert alert-warning col-md-12" role="alert">
+          Shopping Cart is empty!
+      </div>
+  </div>
+                  
   </div>
 
 </div>

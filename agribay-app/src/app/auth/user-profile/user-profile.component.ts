@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartItem } from 'src/app/common/cart-item';
+import { CartService } from 'src/app/services/cart.service';
 
 
 @Component({
@@ -11,7 +13,7 @@ export class UserProfileComponent implements OnInit {
   name: string;
 
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute,private cartservice : CartService) {
     this.name = this.activatedRoute.snapshot.params.name;
 
     // get products here
@@ -19,6 +21,12 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getCartDetails();
   }
+  getCartDetails(){
+    this.cartItems = this.cartservice.cartItems;
+
+  }
+  cartItems: CartItem[] = [];
 
 }

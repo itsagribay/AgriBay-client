@@ -14,8 +14,10 @@ const routes: Routes = [
  // { path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard] },
  // { path: 'create-subreddit', component: CreateSubredditComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  
 ];
+
 
 
 @NgModule({
