@@ -7,13 +7,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
- // { path: '', component: HomeComponent },
- // { path: 'view-post/:id', component: ViewPostComponent },canActivate: [AuthGuard] 
-  { path: 'user-profile/:name', component: UserProfileComponent, canActivate: [AuthGuard]  },
- // { path: 'list-subreddits', component: ListSubredditsComponent },
- // { path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard] },
- // { path: 'create-subreddit', component: CreateSubredditComponent, canActivate: [AuthGuard] },
-  { path: 'signup', component: SignupComponent },
+   { path: 'user-profile/:name', component: UserProfileComponent, canActivate: [AuthGuard]  },
+   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent }
 ];
 
