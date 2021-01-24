@@ -6,25 +6,26 @@
     "agribay-app": {
       "projectType": "application",
       "schematics": {},
-      "root": "",
-      "sourceRoot": "src",
+      "root": "src/tenants/us",
+      "sourceRoot": "src/tenants/us",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/agribay-app",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "index": "src/tenants/us/index.html",
+            "main": "src/tenants/us/main.ts",
+            "polyfills": "src/tenants/us/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
+              "favicon.ico",
               "src/assets"
             ],
             "styles": [
               "src/styles.css",
+              "src/tenants/us/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/ngx-toastr/toastr.css"
