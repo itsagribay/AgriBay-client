@@ -27,11 +27,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptor } from './auth/token-interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
+import { AuthGuard } from './auth/auth.guard';
 //import { EditorModule } from '@tinymce/tinymce-angular';
 
 
 const routes: Routes = [
-  {path: 'checkout', component: CheckoutComponent},
+  {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]},
   {path: 'cart-details', component: CartDetailsComponent },
   {path: 'products/:id', component: ProductDetailsComponent},
   {path: 'search/:keyword', component: ProductListComponent},
