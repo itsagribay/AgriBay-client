@@ -7,6 +7,8 @@ export class CartItem
     imageUrl:string;
     unitPrice:number;
     quantity:number;
+    selectedQuantity:number;
+    unit:string;
 
     constructor(product:Product)
     {
@@ -15,6 +17,8 @@ export class CartItem
         this.imageUrl = product.imageUrl1;
         this.unitPrice = product.unitPrice;
         this.quantity = 1;
+        this.selectedQuantity ;
+        this.unit = product.item.unit;
     }
 
 

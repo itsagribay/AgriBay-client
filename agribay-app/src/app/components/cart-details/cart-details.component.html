@@ -6,7 +6,7 @@
                 <table class="table table-bordered">
                     <tr>
                         <th width="20">Items</th>
-                        <th width="50"></th>
+                        <th width="50">Description</th>
                         <th width="30">Price</th>
                     </tr>
 
@@ -35,7 +35,11 @@
                                    
 
                                     <div class="col ml-4 mr-2">
-                                        {{tempCartItem.quantity}}
+                                         <!-- {{tempCartItem.quantity}} -->
+                                          Quantity:{{tempCartItem.selectedQuantity}}
+                                          {{tempCartItem.unit}}s
+                                          
+                                        <!-- {{tempCartItem.item.unitPrice}} -->
                                     </div>
                                     <div class="row no-gutters">
                                         <div class="col">

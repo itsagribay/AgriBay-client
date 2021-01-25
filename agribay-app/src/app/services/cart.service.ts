@@ -42,6 +42,8 @@ export class CartService {
       existingCartItem.quantity++;
     }
     else {
+      //theCartItem.selectedQuantity = this.selectedValue;
+
       this.cartItems.push(theCartItem);
     }
 
@@ -80,7 +82,7 @@ export class CartService {
    
     //get index of item in the array
  
-    const itemIndex = this.cartItems.findIndex(tempCartItem=>tempCartItem.id= theCartItem.id);
+    const itemIndex = this.cartItems.findIndex(tempCartItem=>tempCartItem.id === theCartItem.id);
 
     //if found remove the item from the array
 
@@ -96,5 +98,8 @@ export class CartService {
      this.storage.setItem('cart',JSON.stringify(this.cartItems));
    }
 
+
+   //drop down value
+   selectedValue: number = 1;
 
 }

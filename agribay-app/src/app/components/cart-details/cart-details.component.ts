@@ -17,6 +17,8 @@ export class CartDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.listCartDetails();
   }
+  selectedValue:number = this.cartService.selectedValue;
+
   listCartDetails() {
     //copying the items from the service
     this.cartItems = this.cartService.cartItems;
