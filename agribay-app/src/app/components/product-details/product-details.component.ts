@@ -34,6 +34,13 @@ export class ProductDetailsComponent implements OnInit {
     )
   }
 
+  getFullPathOfImage(product: Product) {
+    return null;
+    // const sellerName = product.seller.username;
+    // const sellerId = product.seller.id;
+    // return `http://localhost:8080/products/image/download/${sellerName}${sellerId}/${product.imageUrl1}`;
+  }
+
   addToCart(){
     const theCartItem = new CartItem(this.product);
     this.cartService.addToCart(theCartItem);

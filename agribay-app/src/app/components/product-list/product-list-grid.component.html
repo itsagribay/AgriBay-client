@@ -5,10 +5,9 @@
         <div *ngFor="let product of products" class="col-md-3">
           <div class="product-box">
             <a routerLink="/products/{{ product.id }}">
-              <img src="{{ product.imageUrl1 }}" class="img-responsive" />
-            </a>
-            
-            <a routerLink="/products/{{ product.id }}">
+              <img 
+                src="{{ setAppropriateImageSrc(product) }}" 
+                class="img-responsive" />
               <h1>{{ product.item.name }}</h1>
             </a>
             
@@ -57,7 +56,7 @@
                 <div class="col-md-3 mt-2" style="text-align: right;">
                   <span class="mr-2">Page Size</span>
                   <select (change)="updatePageSize($event.target.value)">
-                    <option selected="true">2</option> <!-- change 2 to 5 during deployment -->
+                    <option selected="true">5</option> <!-- change 2 to 5 during deployment -->
                     <option>10</option>
                     <option>25</option>
                     <option>50</option>

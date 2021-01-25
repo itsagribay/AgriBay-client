@@ -8,17 +8,15 @@ import { Purchase } from '../class/purchase';
 })
 export class CheckoutService {
 
-  reset() {
-    // to do - reset cart
-  }
-
-
-  private purchaseApi = 'http://localhost:8080/api/checkout/';
+  private purchaseApi = 'http://localhost:8080/api/checkout/purchase';
 
 
   constructor(private httpClient: HttpClient) { }
 
   placeOrder(purchase: Purchase): Observable<any> {
+    console.log("checkout service obs");
+    console.log(JSON.stringify(purchase));
+    console.log(purchase);
     return this.httpClient.post<Purchase>(this.purchaseApi, purchase);
   }
 }
