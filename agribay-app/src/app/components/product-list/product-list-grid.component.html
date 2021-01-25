@@ -5,14 +5,21 @@
         <div *ngFor="let product of products" class="col-md-3">
           <div class="product-box">
             <a routerLink="/products/{{ product.id }}">
-              <img src="{{ product.imageUrl1 }}" class="img-responsive" />
-            </a>
-            
-            <a routerLink="/products/{{ product.id }}">
+              <img 
+                src="{{ setAppropriateImageSrc(product) }}" 
+                class="img-responsive" />
               <h1>{{ product.item.name }}</h1>
             </a>
-            
-            <div class="price">{{ product.totalPrice | currency: "INR" }}</div>
+            <p>Sold by {{ product.seller.username }}</p>
+
+            <div class="price">{{ product.unitPrice | currency: "INR" }} for 1 {{ product.item.unit }}</div>
+            <div class="mt-2 mb-2">
+              <span class="mr-2">Quantity: </span>
+              <select>
+                <option *ngFor="let in of counter(product.totalQuantity); let i = index">{{ i + 1 }}</option>
+              </select>
+              <span> {{ product.item.unit }}s</span>
+            </div>
             <button (click) ="addToCart(product)" class="btn btn-primary btn-sm">Add to cart</button>
           </div>
         </div>
@@ -46,7 +53,7 @@
                 <div class="col-md-3 mt-2" style="text-align: right;">
                   <span class="mr-2">Page Size</span>
                   <select (change)="updatePageSize($event.target.value)">
-                    <option selected="true">2</option> <!-- change 2 to 5 during deployment -->
+                    <option selected="true">5</option> <!-- change 2 to 5 during deployment -->
                     <option>10</option>
                     <option>25</option>
                     <option>50</option>

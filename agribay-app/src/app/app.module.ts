@@ -4,19 +4,23 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { ProductService } from "./services/product.service";
-
-import { Routes, RouterModule } from "@angular/router";
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { ProductSearchComponent } from './components/product-search/product-search.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
-
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
+import { SellerProductListingComponent } from './components/seller-product-listing/seller-product-listing.component';
+import { CreateProductListingComponent } from './components/create-product-listing/create-product-listing.component';
+
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { Routes, RouterModule } from "@angular/router";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { ProductService } from "./services/product.service";
+import { SellerProductListingService } from "./services/seller-product-listing.service";
+
+import { CheckoutComponent } from './components/checkout/checkout.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,11 +31,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptor } from './auth/token-interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
+import { EditProductListingComponent } from './components/edit-product-listing/edit-product-listing.component';
 import { AuthGuard } from './auth/auth.guard';
 //import { EditorModule } from '@tinymce/tinymce-angular';
 
 
 const routes: Routes = [
+  {path: 'product-listing/edit/:id', component: EditProductListingComponent},
+  {path: 'product-listing/create', component: CreateProductListingComponent},
+  {path: 'product-listing', component: SellerProductListingComponent},
   {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]},
   {path: 'cart-details', component: CartDetailsComponent },
   {path: 'products/:id', component: ProductDetailsComponent},
@@ -42,7 +50,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'login', component: LoginComponent},
   {path: '', redirectTo: '/products', pathMatch: 'full'},
-  {path: '**', redirectTo: '/products', pathMatch: 'full'}, 
+  {path: '**', redirectTo: '/products', pathMatch: 'full'},
 ];
 
 @NgModule({
@@ -54,11 +62,13 @@ const routes: Routes = [
     ProductDetailsComponent,
     CartStatusComponent,
     CartDetailsComponent,
+    SellerProductListingComponent,
+    CreateProductListingComponent,
     CheckoutComponent,
     SignupComponent,
     LoginComponent,
-    UserProfileComponent
-    
+    UserProfileComponent,
+    EditProductListingComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -66,33 +76,21 @@ const routes: Routes = [
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
-    NgxWebstorageModule.forRoot(),
-    BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    FontAwesomeModule,
-    //EditorModule,
-    NgbModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    ReactiveFormsModule,
-    
-
+    FontAwesomeModule,
+    NgxWebstorageModule.forRoot(),
   ],
-
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
     },
-    ProductService
-  // ,{
-  //     provide: ProductService,
-  //     useClass:ProductService,
-  //     multi:true
-  // }
+    ProductService,
+    SellerProductListingService
 ],
   bootstrap: [AppComponent]
- // providers: [ProductService],
-  
 })
 export class AppModule { }
