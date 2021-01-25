@@ -1,10 +1,13 @@
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { FormArray } from "@angular/forms";
 import { Router } from '@angular/router';
 import { Item } from 'src/app/common/item';
+import { Product } from 'src/app/common/product';
 import { SellerProductListingService } from 'src/app/services/seller-product-listing.service';
+import { requiredFileType } from './upload-file-validators';
 
 @Component({
   selector: 'app-create-product-listing',
@@ -16,16 +19,25 @@ export class CreateProductListingComponent implements OnInit {
   productListingForm = this.fb.group({
     itemId: ["", Validators.required],
     unitPrice: [1, Validators.required],
-    totalQuantity: [0, Validators.required],
-    imageUrl1: [""],
-    imageUrl2: [""],
+    totalQuantity: [1, Validators.required],
     description: [""],
-    sellerAddress: [""]   // just here with default value if address is required in future.
   });
 
-  items: Array<Item>;
-  totalPrice: number = 0;
+  items: Array<Item> = [];
+  totalPrice: number = 1;
   unitsForQuantity: string = 'kg';
+
+  selectedFiles: FileList
+  currentFileUpload: File
+  progress: { percentage: number } = { percentage: 0 }
+
+  selectedImageFile1: File = null;
+  imageFile1Upload: File = null;
+
+  selectedImageFile2: File = null;
+  imageFile2Upload: File = null;
+
+  isSelectedImageFilesValid: boolean = true;
 
   constructor(private fb: FormBuilder, 
     private sellerProductListingService: SellerProductListingService,
@@ -64,11 +76,65 @@ export class CreateProductListingComponent implements OnInit {
       });
     });
   }
+
+  addToSellerProductListing(product: Product) {
+    this.sellerProductListingService.sendNewProduct(product);
+  }
+
+  toFormData<T>( formValue: T ) {
+    const formData = new FormData();
+    formData.append('productCreateRequest', JSON.stringify(this.productListingForm.value));
+    formData.append('image', 'something appropriate here');
+    return formData;
+  }
+
+  selectFile(id: any, file: any) {
+    console.log(id + " " + file);
+    if (id === 'image1') {
+      this.selectedImageFile1 = file;
+    } else if (id === 'image2') {
+      this.selectedImageFile2 = file;
+    }
+  }
+
+  handleSelectFileChange(event) {
+    const id = event.target.id;
+    const file = event.target.files.item(0)
+
+    if (file.type.match('image.*')) {
+      this.isSelectedImageFilesValid = true;
+      this.selectFile(id, file);
+    } else {
+      this.isSelectedImageFilesValid = false;
+      alert('invalid format!');
+    }
+  }
   
   onSubmit() {
-    this.sellerProductListingService
-    .createProductListing(this.productListingForm.value)
-    .subscribe(data => console.log(data));
-    this.router.navigateByUrl('/product-listing');    
+    this.progress.percentage = 0;
+    const productCreateRequest = JSON.stringify(this.productListingForm.value);
+    
+    this.imageFile1Upload = this.selectedImageFile1;
+    this.imageFile2Upload = this.selectedImageFile2;
+
+    this.sellerProductListingService.createProductListing(
+      productCreateRequest, 
+      this.imageFile1Upload,
+      this.imageFile2Upload).subscribe(event => {
+      if (event.type === HttpEventType.UploadProgress) {
+        this.progress.percentage = Math.round(100 * event.loaded / event.total);
+        console.log("progress percent " + this.progress.percentage);
+      } else if (event instanceof HttpResponse) {
+        console.log('File is completely uploaded!');
+        const product = event.body;
+        this.addToSellerProductListing(product);
+        // setTimeout(() => {
+          this.router.navigateByUrl('/product-listing')
+        // }, 1000);
+      }
+    })
+  
+    this.selectedImageFile1 = undefined;
+    this.selectedImageFile2 = undefined;
   }
 }

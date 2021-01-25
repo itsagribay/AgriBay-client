@@ -31,11 +31,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptor } from './auth/token-interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
+import { EditProductListingComponent } from './components/edit-product-listing/edit-product-listing.component';
 //import { EditorModule } from '@tinymce/tinymce-angular';
 
 
 const routes: Routes = [
-  //{path: 'product-listing/edit/:id', component: EditProductListing}
+  {path: 'product-listing/edit/:id', component: EditProductListingComponent},
   {path: 'product-listing/create', component: CreateProductListingComponent},
   {path: 'product-listing', component: SellerProductListingComponent},
   {path: 'checkout', component: CheckoutComponent},
@@ -65,8 +66,8 @@ const routes: Routes = [
     CheckoutComponent,
     SignupComponent,
     LoginComponent,
-    UserProfileComponent
-    
+    UserProfileComponent,
+    EditProductListingComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

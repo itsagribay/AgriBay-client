@@ -20,7 +20,7 @@ export class ProductListComponent implements OnInit {
 
   // new properties for pagination
   pageNumber: number = 1;
-  pageSize: number = 2; // change to 10 later
+  pageSize: number = 1; // change to 10 later
   totalElements: number = 0;
 
   previousKeyword: string = null;
@@ -95,7 +95,6 @@ export class ProductListComponent implements OnInit {
       .subscribe(this.processResult());
   }
 
-
   handleListAllProducts() {
     this.productService.getAllProductsPaginate(
       this.pageNumber - 1,
@@ -117,6 +116,17 @@ export class ProductListComponent implements OnInit {
 
   counter(i: number) {
     return new Array(i);
+  }
+  
+  setAppropriateImageSrc(product: Product) {
+    return null;
+    // const sellerName = product.seller.username;
+    // const sellerId = product.seller.id;
+    // if (product.imageUrl1 !== '') { 
+    //   return `http://localhost:8080/products/image/download/${sellerName}${sellerId}/${product.imageUrl1}`;
+    // } else {
+    //   return product.item.defaultImage;
+    // }
   }
 
 }

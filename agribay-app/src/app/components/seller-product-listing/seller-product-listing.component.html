@@ -1,6 +1,10 @@
 <div class="main-content">
     <div class="section-content section-content-p30">
       <div class="container-fluid">
+<!-- 
+    <div class="alert alert-warning col-md-12" role="alert">
+        Use this to show any message if required.
+    </div> -->
 
 <table class="table table-striped">
     <thead style="background:#205b8d; color: white;">
@@ -21,9 +25,11 @@
             <td>{{ product.totalQuantity }}</td>
             <td>{{ product.totalPrice }}</td>
             <td>
-                <button type="button" class="btn btn-primary">
-                    Edit
-                </button>
+                <a routerLink="/product-listing/edit/{{product.id}}">
+                    <button type="button" class="btn btn-primary">
+                        Edit
+                    </button>
+                </a>
             </td>
             <td>
                 <button type="button" class="btn btn-danger" (click)="openDeleteDialogModal(content, product)">

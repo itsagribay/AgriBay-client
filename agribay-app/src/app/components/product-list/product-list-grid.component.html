@@ -5,7 +5,9 @@
         <div *ngFor="let product of products" class="col-md-3">
           <div class="product-box">
             <a routerLink="/products/{{ product.id }}">
-              <img src="{{ product.imageUrl1 }}" class="img-responsive" />
+              <img 
+                src="{{ setAppropriateImageSrc(product) }}" 
+                class="img-responsive" />
               <h1>{{ product.item.name }}</h1>
             </a>
             <p>Sold by {{ product.seller.username }}</p>
@@ -14,7 +16,7 @@
             <div class="mt-2 mb-2">
               <span class="mr-2">Quantity: </span>
               <select>
-                <option *ngFor="let in of counter(product.totalQuantity); let i = index">{{ i }}</option>
+                <option *ngFor="let in of counter(product.totalQuantity); let i = index">{{ i + 1 }}</option>
               </select>
               <span> {{ product.item.unit }}s</span>
             </div>
@@ -51,7 +53,7 @@
                 <div class="col-md-3 mt-2" style="text-align: right;">
                   <span class="mr-2">Page Size</span>
                   <select (change)="updatePageSize($event.target.value)">
-                    <option selected="true">2</option> <!-- change 2 to 5 during deployment -->
+                    <option selected="true">1</option> <!-- change 2 to 5 during deployment -->
                     <option>10</option>
                     <option>25</option>
                     <option>50</option>
