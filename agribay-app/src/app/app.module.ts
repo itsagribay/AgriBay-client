@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProductService } from "./services/product.service";
 import { SellerProductListingService } from "./services/seller-product-listing.service";
+import { OrderRequestService } from "./services/order-request.service";
 
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -33,10 +34,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
 import { EditProductListingComponent } from './components/edit-product-listing/edit-product-listing.component';
 import { AuthGuard } from './auth/auth.guard';
+import { OrderRequestComponent } from './components/order-request/order-request.component';
 //import { EditorModule } from '@tinymce/tinymce-angular';
 
 
 const routes: Routes = [
+  {path: 'order-requests', component: OrderRequestComponent},
   {path: 'product-listing/edit/:id', component: EditProductListingComponent},
   {path: 'product-listing/create', component: CreateProductListingComponent},
   {path: 'product-listing', component: SellerProductListingComponent},
@@ -68,7 +71,8 @@ const routes: Routes = [
     SignupComponent,
     LoginComponent,
     UserProfileComponent,
-    EditProductListingComponent
+    EditProductListingComponent,
+    OrderRequestComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -89,7 +93,8 @@ const routes: Routes = [
       multi: true
     },
     ProductService,
-    SellerProductListingService
+    SellerProductListingService,
+    OrderRequestService
 ],
   bootstrap: [AppComponent]
 })
