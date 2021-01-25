@@ -53,7 +53,8 @@
 
                             <button (click)="remove(tempCartItem)" class="btn btn-danger btn-sm mt-2">Remove</button>
 
-                            <p class="mt-2">Subtotal:{{tempCartItem.quantity*tempCartItem.unitPrice | currency: 'INR'}}
+                            <!-- <p class="mt-2">Subtotal:{{tempCartItem.quantity*tempCartItem.unitPrice | currency: 'INR'}} -->
+                            <p class="mt-2">Subtotal:{{tempCartItem.selectedQuantity*tempCartItem.unitPrice | currency: 'INR'}}
                             </p>
                         </td>
                     </tr>

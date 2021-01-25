@@ -11,20 +11,19 @@
               <h1>{{ product.item.name }}</h1>
             </a>
             
-            <div class="price">{{ product.totalPrice | currency: "INR" }}</div>
+            <div class="price">{{ product.unitPrice | currency: "INR" }}</div>
             Sold by:xyz<br>
           <div class="mt-2 mb-2">
             <span class="mr-2">Quantity: </span>
             <select (change)="selectChangeHandler($event,product)">
               <option *ngFor="let in of counter(product.totalQuantity); 
               let i = index">{{ i + 1 }}
-            </option>
+            </option> 
             </select>
             <span> {{ product.item.unit }}s</span>
           </div>
             <button (click) ="addToCart(product)" class="btn btn-primary btn-sm">Add to cart</button>
           </div>
-          {{selectedValue.get(product.id)}}
         </div>
 
         <!-- if products are empty then display a message -->

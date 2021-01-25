@@ -111,27 +111,24 @@ export class ProductListComponent implements OnInit {
    addToCart(theProduct:Product)
    {
      const theCartItem = new CartItem(theProduct);
-     theCartItem.selectedQuantity = this.selectedValue.get(theProduct.id);
+     this.cartService.selectedValue = theCartItem.selectedQuantity = this.selectedValue.get(theProduct.id);
      console.log("selected value= " + theCartItem.selectedQuantity);
      if (theCartItem.selectedQuantity == undefined)
      {
        theCartItem.selectedQuantity = 1;
+       this.cartService.selectedValue = 1;
      }
      this.cartService.addToCart(theCartItem);
+     
    }
 
   counter(i: number) {
     return new Array(i);
   }
-   //map = new Map();
- // selectedValue:number=1;
 
  selectedValue: Map<number, number> = new Map();
   selectChangeHandler(event:any,product:Product){
     this.selectedValue.set(product.id, event.target.value);
-    // this.selectedValue = event.target.value;
-    //this.cartService.selectedValue = this.selectedValue.get(product.id);
-    alert(this.selectedValue.get(product.id));
     console.log(product);
   }
   

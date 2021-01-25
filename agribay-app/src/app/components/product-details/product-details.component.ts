@@ -43,7 +43,22 @@ export class ProductDetailsComponent implements OnInit {
 
   addToCart(){
     const theCartItem = new CartItem(this.product);
+    this.cartService.selectedValue = theCartItem.selectedQuantity = this.selectedValue.get(this.product.id);
+    if (theCartItem.selectedQuantity == undefined) {
+      theCartItem.selectedQuantity = 1;
+      this.cartService.selectedValue = 1;
+    }
     this.cartService.addToCart(theCartItem);
+  }
+
+  counter(i: number) {
+    return new Array(i);
+  }
+
+  selectedValue: Map<number, number> = new Map();
+  selectChangeHandler(event: any, product: Product) {
+    this.selectedValue.set(product.id, event.target.value);
+    console.log(product);
   }
 
 }
