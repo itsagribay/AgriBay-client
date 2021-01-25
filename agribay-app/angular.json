@@ -17,7 +17,7 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "tsConfig": "src/tsconfig.app.json",
             "aot": true,
             "assets": [
               "src/favicon.ico",
@@ -120,8 +120,128 @@
               "devServerTarget": "agribay-app:serve:production"
             }
           }
-        }
-      }
-    }},
+        }, 
+        "agribay-app-US": {          
+          "projectType": "application",
+          "schematics": {},
+          "root": "src/tenants/US",
+          "sourceRoot": "src/tenants/US",
+          "prefix": "app",
+          "architect": {
+            "build": {
+              "builder": "@angular-devkit/build-angular:browser",
+              "options": {
+                "outputPath": "dist/us",
+                "index": "src/tenants/US/index.html",
+                "main": "src/tenants/US/main.ts",
+                "polyfills": "src/tenants/US/polyfills.ts",
+                "tsConfig": "src/tenants/US/tsconfig.app.json",
+                "aot": true,
+                "assets": [
+                  "src/tenants/US/favicon.ico",
+                  "src/tenants/US/assets"
+                ],
+                "styles": [
+                  "src/tenants/US/styles.css",
+                  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                  "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+                  "node_modules/ngx-toastr/toastr.css"
+                ],
+                "scripts": []
+              },
+              "configurations": {
+                "production": {
+                  "fileReplacements": [
+                    {
+                      "replace": "src/tenants/US/environments/environment.ts",
+                      "with": "src/tenants/US/environments/environment.prod.ts"
+                    }
+                  ],
+                  "optimization": true,
+                  "outputHashing": "all",
+                  "sourceMap": false,
+                  "extractCss": true,
+                  "namedChunks": false,
+                  "extractLicenses": true,
+                  "vendorChunk": false,
+                  "buildOptimizer": true,
+                  "budgets": [
+                    {
+                      "type": "initial",
+                      "maximumWarning": "2mb",
+                      "maximumError": "5mb"
+                    },
+                    {
+                      "type": "anyComponentStyle",
+                      "maximumWarning": "6kb",
+                      "maximumError": "10kb"
+                    }
+                  ]
+                }
+              }
+            },
+            "serve": {
+              "builder": "@angular-devkit/build-angular:dev-server",
+              "options": {
+                "browserTarget": "agribay-app-US:build"
+              },
+              "configurations": {
+                "production": {
+                  "browserTarget": "agribay-app-US:build:production"
+                }
+              }
+            },
+            "extract-i18n": {
+              "builder": "@angular-devkit/build-angular:extract-i18n",
+              "options": {
+                "browserTarget": "agribay-app-US:build"
+              }
+            },
+            "test": {
+              "builder": "@angular-devkit/build-angular:karma",
+              "options": {
+                "main": "src/tenants/US/test.ts",
+                "polyfills": "src/tenants/US/polyfills.ts",
+                "tsConfig": "src/tenants/US/tsconfig.spec.json",
+                "karmaConfig": "src/tenants/US/karma.conf.js",
+                "assets": [
+                  "src/tenants/US/favicon.ico",
+                  "src/tenants/US/assets"
+                ],
+                "styles": [
+                  "src/tenants/US/styles.css"
+                ],
+                "scripts": []
+              }
+            },
+            "lint": {
+              "builder": "@angular-devkit/build-angular:tslint",
+              "options": {
+                "tsConfig": [
+                  "src/tenants/US/tsconfig.app.json",
+                  "src/tenants/US/tsconfig.spec.json",
+                  "e2e/tsconfig.json"
+                ],
+                "exclude": [
+                  "**/node_modules/**"
+                ]
+              }
+            },
+            "US-e2e": {
+              "builder": "@angular-devkit/build-angular:protractor",
+              "options": {
+                "protractorConfig": "e2e/tenants/US/protractor.conf.js",
+                "devServerTarget": "agribay-app-US:serve"
+              },
+              "configurations": {
+                "production": {
+                  "devServerTarget": "agribay-app-US:serve:production"
+                }
+              }
+            }
+
+          }
+  },
+
   "defaultProject": "agribay-app"
 }
