@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { Item } from 'src/app/common/item';
 import { Product } from 'src/app/common/product';
 import { SellerProductListingService } from 'src/app/services/seller-product-listing.service';
-import { requiredFileType } from './upload-file-validators';
 
 @Component({
   selector: 'app-create-product-listing',
@@ -27,16 +26,14 @@ export class CreateProductListingComponent implements OnInit {
   totalPrice: number = 1;
   unitsForQuantity: string = 'kg';
 
-  selectedFiles: FileList
-  currentFileUpload: File
-  progress: { percentage: number } = { percentage: 0 }
-
+  
   selectedImageFile1: File = null;
   imageFile1Upload: File = null;
-
+  
   selectedImageFile2: File = null;
   imageFile2Upload: File = null;
-
+  
+  progress: { percentage: number } = { percentage: 0 }
   isSelectedImageFilesValid: boolean = true;
 
   constructor(private fb: FormBuilder, 
@@ -127,6 +124,7 @@ export class CreateProductListingComponent implements OnInit {
       } else if (event instanceof HttpResponse) {
         console.log('File is completely uploaded!');
         const product = event.body;
+        console.log(product);
         this.addToSellerProductListing(product);
         // setTimeout(() => {
           this.router.navigateByUrl('/product-listing')
