@@ -17,7 +17,7 @@ export class CartDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.listCartDetails();
   }
-  selectedValue:number = this.cartService.selectedValue;
+  //selectedValue:number = this.cartService.selectedValue;
 
   listCartDetails() {
     //copying the items from the service
@@ -33,9 +33,18 @@ export class CartDetailsComponent implements OnInit {
     this.cartService.computeCartTotals();
   }
 
+  
+  // incrementQuantity(theCartItem:CartItem){
+  //   //this.cartService.addToCart(theCartItem);
+  //   this.cartService.incrementQuantity(theCartItem);
+  //   alert(theCartItem.selectedQuantity);
+  // }
+
+
   //increment quantity
-  incrementQuantity(theCartItem:CartItem){
-    this.cartService.addToCart(theCartItem);
+  incrementQuantity(tempCartItem) {
+    //this.cartService.addToCart(theCartItem);
+    this.cartService.incrementQuantity(tempCartItem);
   }
 
 

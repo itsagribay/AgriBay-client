@@ -16,7 +16,7 @@ export class CartItem
         this.name = product.item.name;
         this.imageUrl = product.imageUrl1;
         this.unitPrice = product.unitPrice;
-        this.quantity = 1;
+        this.quantity = product.totalQuantity;
         this.selectedQuantity ;
         this.unit = product.item.unit;
     }

@@ -7,9 +7,14 @@ import { CartItem } from '../common/cart-item';
 })
 export class CartService {
   
+  //drop down value
+  selectedValue: number;
+
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
 
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
+
+  //totalValue: Subject<number> = new BehaviorSubject<number>(0);
   cartItems: CartItem[] = [];
   constructor() {
     let data = JSON.parse(this.storage.getItem('cart'));
@@ -39,7 +44,7 @@ export class CartService {
 
     }
     if (alreadyExistsInCart) {
-      existingCartItem.quantity++;
+      existingCartItem.selectedQuantity = this.selectedValue;
     }
     else {
       //theCartItem.selectedQuantity = this.selectedValue;
@@ -56,8 +61,10 @@ export class CartService {
     let totalQuantityValue: number = 0;
 
     for (let currentCartItem of this.cartItems) {
-      totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice;
-      totalQuantityValue += currentCartItem.quantity;
+      // totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice;
+      // totalQuantityValue += currentCartItem.quantity;
+      totalPriceValue += currentCartItem.selectedQuantity * currentCartItem.unitPrice;
+      totalQuantityValue++;
     }
     
     //publish the new values.all the subscribers will recieve the data
@@ -69,15 +76,26 @@ export class CartService {
   }
 
   decrementQuantity(theCartItem: CartItem) {
-    theCartItem.quantity--;
+    //theCartItem.quantity--;
+    theCartItem.selectedQuantity--;
 
-    if(theCartItem.quantity === 0){
+    if (theCartItem.selectedQuantity === 0){
       this.remove(theCartItem);
     }
     else{
       this.computeCartTotals();
     }
   }
+
+
+  //increment quantity(checks wether selected value is less than cartItem quantity)
+  incrementQuantity(theCartItem: CartItem) {
+    if(theCartItem.selectedQuantity < theCartItem.quantity){
+      theCartItem.selectedQuantity++;
+    }
+    this.computeCartTotals();
+  }
+
   remove(theCartItem: CartItem) {
    
     //get index of item in the array
@@ -93,13 +111,11 @@ export class CartService {
     }
   }
 
+
+  //saves the data to the local storage with key "cart"
    saveCartItems()
    {
      this.storage.setItem('cart',JSON.stringify(this.cartItems));
    }
-
-
-   //drop down value
-   selectedValue: number = 1;
 
 }
