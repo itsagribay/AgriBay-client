@@ -87,19 +87,11 @@ export class CartService {
     }
   }
 
-  incrementQuantity(theCartItem: CartItem) {
-    //theCartItem.quantity--;
-    // theCartItem.selectedQuantity--;
 
-    // if (theCartItem.quantity === 0 || theCartItem.selectedQuantity === 0) {
-    //   this.remove(theCartItem);
-    // }
-    // else {
-    //   this.computeCartTotals();
-    // }
+  //increment quantity(checks wether selected value is less than cartItem quantity)
+  incrementQuantity(theCartItem: CartItem) {
     if(theCartItem.selectedQuantity < theCartItem.quantity){
       theCartItem.selectedQuantity++;
-      console.log(theCartItem.selectedQuantity);
     }
     this.computeCartTotals();
   }
