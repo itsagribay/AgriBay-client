@@ -122,6 +122,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "agribay-app"
+    }
+  },
+  "defaultProject": "agribay-app",
+  "cli": {
+    "analytics": false
+  }
 }
